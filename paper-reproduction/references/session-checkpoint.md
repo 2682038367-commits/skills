@@ -23,17 +23,31 @@ Use only these primary labels for material claims:
 
 ## Main/core experiment priority
 
-| Role | Experiment and paper location | Claim tested | Minimum viable version | Inputs / prerequisites | Cost | Status |
-|---|---|---|---|---|---|---|
-| Main | | | | | | planned / running / complete / blocked |
-| Core | | | | | | planned / running / complete / deferred |
+### Core claim inventory
 
-- Relationship: same / prerequisite-dependent / validity-dependent / shared-base but outcome-independent / independent-parallel
+| Claim ID | [Paper] claim and citation | Primary / co-primary / secondary | Why central to the paper |
+|---|---|---|---|
+| | | | |
+
+### Core experiment candidates
+
+| Candidate | Claim ID | Experiment / paper location | Directness / falsifiability | Cost | Information gain | Dependencies | Minimum viable version | Priority / status |
+|---|---|---|---|---|---|---|---|---|
+| A | | | | | | | | selected / alternative / deferred |
+| B | | | | | | | | selected / alternative / deferred |
+| C | | | | | | | | selected / alternative / deferred |
+
+- Main experiment and paper location:
+- Selected default core candidate and claim:
+- Selection rationale: claim centrality → directness/falsifiability → information gain → interpretability → feasibility/cost
+- Ranking ambiguity or user-selected priority:
+- Relationship to main: same / prerequisite-dependent / validity-dependent / shared-base but outcome-independent / independent-parallel
 - Operational dependency:
 - Interpretive dependency:
-- Does the main result predict the core result? yes / no / partially / unknown, with [Paper], [Code], or [Hypothesis] evidence
+- Does the main result predict the selected core result? yes / no / partially / unknown, with [Paper], [Code], or [Hypothesis] evidence
 - Time-limited recommendation:
-- Post-main core gate: pending / full core / minimum viable core / repair main first / defer core
+- Post-main core gate: pending / full selected candidate / minimum viable version / repair main first / defer core
+- Ranking changes after main and [Observed] reason:
 - User decision and rationale:
 
 ## Current stage
@@ -43,7 +57,7 @@ Use only these primary labels for material claims:
 - Next planned checkpoint
 - Pending user decision
 - Latest experiment-ledger entry and Run ID
-- Main/core experiment status and next decision gate
+- Main status, ranked core candidates, selected candidate, and next decision gate
 
 ## Configuration fidelity
 

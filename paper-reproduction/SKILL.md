@@ -44,22 +44,29 @@ Read the paper and relevant supplement closely enough to produce a reproduction 
 
 Trace every important item to its source using the four evidence labels. Never fill a gap silently.
 
-### Identify the main and core experiments
+### Identify the main and core experiments from claims
 
-When the paper contains many experiments, identify these roles immediately after the paper map:
+When the paper contains many experiments, establish the claim hierarchy before choosing experiments. Extract explicit innovation claims from the title, abstract, introduction/contribution list, method framing, and conclusion. Cite each as **[Paper]** and classify it as **primary**, **co-primary**, or **secondary** based on how centrally the paper frames its novelty and promised capability. Do not infer the core claim from the largest numerical gain, most visually striking result, or largest result table.
 
 - **Main experiment:** the headline or standard benchmark experiment used to establish the overall result against the principal baselines.
-- **Core experiment:** the single most discriminating experiment that directly demonstrates the largest claimed advantage of the paper innovation. Prefer an experiment whose result would be difficult to explain without the proposed innovation, such as a decisive ablation, controlled comparison, stress test, mechanism intervention, or advantage under the target condition. Do not select it merely because it has the largest table or best absolute metric.
+- **Core experiment candidate:** an experiment that directly and discriminatingly tests a primary or co-primary innovation claim. Prefer designs whose outcome could falsify that claim, such as a controlled comparison, targeted ablation, stress test, mechanism intervention, or evaluation under the specifically claimed condition.
 
-The main and core experiment may be the same; state that explicitly. Otherwise report for each: claim tested, paper location, target metric or pattern, baseline/control, minimum viable version, required artifacts, expected compute, and why it is assigned that role.
+Allow multiple candidates when the paper makes multiple distinct core claims. Produce candidates A, B, C, and more only when justified:
 
-Classify their relationship as one of: **same experiment**, **prerequisite-dependent**, **validity-dependent**, **shared-base but outcome-independent**, or **independent/parallel**. Separately answer:
+| Candidate | Core [Paper] claim tested | Experiment and paper location | Why it directly tests the claim | Cost | Information gain | Dependencies | Minimum viable version | Priority |
+|---|---|---|---|---|---|---|---|---|
 
-1. Does the core experiment require the main experiment checkpoint, outputs, or validated pipeline to run?
-2. Does the main result determine how the core result should be interpreted?
-3. Does a strong or weak main result logically predict the core result, or is that relationship only a hypothesis?
+Rank candidates by: claim centrality first; then directness and falsifiability, expected information gain, interpretability, and feasibility/cost. Magnitude of reported improvement or visual salience is not a selection criterion by itself. Respect a user-specified claim priority. If multiple co-primary claims make the ranking genuinely ambiguous, explain the tradeoff and ask the user to choose rather than inventing certainty.
 
-Do not confuse operational dependence with evidential dependence. A core experiment may require a checkpoint produced by the main run while still testing an advantage not determined by the main score. In a time-limited plan, recommend completing both the main and core experiments whenever feasible. If the full core experiment is too expensive, propose a minimum viable core experiment and state what evidence it can and cannot provide.
+By default select only one highest-priority candidate for execution while preserving the remaining candidates as documented alternatives. In a time-limited plan, recommend completing the main experiment and this selected core experiment whenever feasible. If the full selected candidate is too expensive, propose a minimum viable version and state what it can and cannot establish.
+
+The main and selected core experiment may be the same; state that explicitly. For the selected candidate—and for alternatives when their dependencies differ—classify the relationship as **same experiment**, **prerequisite-dependent**, **validity-dependent**, **shared-base but outcome-independent**, or **independent/parallel**. Separately answer:
+
+1. Does the candidate require the main checkpoint, outputs, or validated pipeline to run?
+2. Does the main result determine how its result should be interpreted?
+3. Does a strong or weak main result logically predict its result, or is that relationship only **[Hypothesis]**?
+
+Do not confuse operational dependence with evidential dependence. A core candidate may require a checkpoint produced by the main run while testing a claim not determined by the main score.
 
 ## Phase 2: find and audit open-source code
 
@@ -81,7 +88,7 @@ Before implementation or a meaningful experiment, present:
 3. material paper-versus-code differences;
 4. feasible routes, expected fidelity, compute cost, risks, and what each can prove;
 5. a recommendation tied to the user goal;
-6. the selected main experiment, core experiment, dependency class, and time-limited priority plan.
+6. the main experiment, core-claim inventory, ranked core candidates A/B/C, selected default candidate, dependency class, and time-limited priority plan.
 
 For matching published numbers, usually recommend official code at a pinned version as the first baseline, followed by a paper-faithful variant for material discrepancies. For independent reimplementation, use the paper and supplement as the specification and code as clarification evidence. If sources conflict materially, recommend a choice but let the user select the route before proceeding.
 
@@ -89,7 +96,7 @@ For matching published numbers, usually recommend official code at a pinned vers
 
 After route selection, provide an ordered plan with checkpoints. For each step state the exact action, source being followed, expected artifact, validation and stop condition, and material compute cost.
 
-The ordered plan must mark every experiment as **main**, **core**, or **supporting** and show prerequisites. Unless evidence indicates another order, establish the main baseline first and reserve time for the core experiment.
+The ordered plan must mark every experiment as **main**, **core:<candidate-id>**, or **supporting** and show prerequisites. Mark unselected core candidates as deferred alternatives rather than discarding them. Unless evidence indicates another order, establish the main baseline first and reserve time for the selected highest-priority core candidate.
 
 Create an isolated environment when practical. Validate data provenance, licensing, shapes, mappings, splits, and preprocessing. Treat downloaded code and scripts as untrusted until inspected. Start with the cheapest end-to-end diagnostic, then a small controlled run, then the full target.
 
@@ -131,7 +138,7 @@ Report exact configuration fidelity, known deviations, and their likely impact. 
 
 ## Core-experiment decision gate after the main run
 
-After the main experiment finishes, do not automatically start or discard the core experiment. Present the user with a recommendation based on:
+After the main experiment finishes, do not automatically start or discard a core experiment. Re-evaluate the ranked core candidates using the new **[Observed]** evidence, preserve any ranking change with its reason, and present the user with a recommendation based on:
 
 - whether the main run is auditable and faithful enough for the core result to be interpretable;
 - the main metric gap, multi-seed context, conclusion impact, and unresolved setup failures;
@@ -139,7 +146,7 @@ After the main experiment finishes, do not automatically start or discard the co
 - whether the core experiment can diagnose the main gap or test the innovation despite a weak main score;
 - remaining time/compute and the information gain of the full or minimum viable core experiment.
 
-Recommend exactly one next state: **run the full core experiment**, **run the minimum viable core experiment**, **repair/rerun the main experiment first**, or **defer/skip the core experiment**. Explain what evidence would be gained or lost. A poor main score is not by itself sufficient reason to skip an outcome-independent or diagnostically useful core experiment; an invalid prerequisite is a reason to repair the main path first. Let the user decide before incurring meaningful core-experiment cost, and record the decision in both state and ledger.
+Recommend exactly one next state for one named candidate: **run the full selected core candidate**, **run its minimum viable version**, **repair/rerun the main experiment first**, or **defer/skip core execution**. Explain what evidence would be gained or lost. A poor main score is not by itself sufficient reason to skip an outcome-independent or diagnostically useful core experiment; an invalid prerequisite is a reason to repair the main path first. Let the user decide before incurring meaningful core-experiment cost, and record the decision in both state and ledger.
 
 ## Experiment stopping rules
 
@@ -175,7 +182,7 @@ End every substantive response—and always every run report—with a concise ch
 - configuration fidelity and the linked Run ID/configuration snapshot;
 - problems and ranked hypotheses;
 - stopping-rule status for each active hypothesis;
-- main/core experiment status, dependency, and whether the core-experiment gate is pending or resolved;
+- main experiment status, core-claim inventory, ranked candidate list, selected candidate and dependency, and whether the post-main core gate is pending or resolved;
 - recommended next single-factor action and alternatives;
 - the explicit decision needed from the user: keep configuration, modify one named factor, authorize a bundled non-attributable change, investigate a discrepancy, stop a direction, or continue.
 
