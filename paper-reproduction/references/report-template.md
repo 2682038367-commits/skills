@@ -56,6 +56,22 @@ Every result-bearing run must link a manifest containing repository commit and d
 
 State how the multi-seed range was obtained. If the paper and local experiments provide no comparable range, mark it unknown.
 
+## Conclusion reproduction status
+
+Judge each material conclusion, not only the headline metric. Numerical, trend, and mechanism reproduction are separate dimensions and may coexist.
+
+| Paper conclusion | Numerical reproduction | Trend reproduction | Mechanism reproduction | Not reproduced / inconclusive | Supporting Run IDs | Configuration fidelity and limitations |
+|---|---|---|---|---|---|---|
+| | yes / no / inconclusive | yes / no / inconclusive | yes / no / inconclusive | status and tested dimension | | |
+
+- **Numerical reproduction:** target values fall within predeclared tolerance or comparable multi-seed variation.
+- **Trend reproduction:** direction, ranking, scaling behavior, or ablation pattern matches across the necessary conditions.
+- **Mechanism reproduction:** targeted intervention, ablation, or trace supports the proposed causal mechanism; similar outputs alone do not qualify.
+- **Not reproduced:** sufficiently comparable evidence contradicts the tested claim.
+- **Inconclusive:** evidence is missing, unauditable, underpowered, non-comparable, or non-discriminating.
+
+Give an overall synthesis only after the per-claim table. Do not infer mechanism reproduction from numerical or trend reproduction.
+
 ## Controlled experiment and diagnosis ledger
 
 | [Hypothesis] | One changed factor | Controlled factors | Evidence and outcomes | Falsifications | Decision / stop reason |

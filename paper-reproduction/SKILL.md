@@ -9,7 +9,7 @@ Guide one paper at a time from source analysis to an auditable reproduction. Pre
 
 ## Start or resume the paper
 
-When the user supplies a new paper, treat it as a new reproduction unless they explicitly link it to an existing one. Establish a workspace and maintain `reproduction-state.md` there using [references/session-checkpoint.md](references/session-checkpoint.md). If a state file already exists, read it before proposing or running more work.
+When the user supplies a new paper, treat it as a new reproduction unless they explicitly link it to an existing one. Establish a workspace and maintain `reproduction-state.md` using [references/session-checkpoint.md](references/session-checkpoint.md) plus a chronological `experiment-ledger.md` using [references/experiment-ledger.md](references/experiment-ledger.md). If either file already exists, read it before proposing or running more work.
 
 Classify the intended outcome:
 
@@ -93,6 +93,10 @@ Assign every run a stable Run ID. Before accepting its metrics as reproduction e
 
 Link the Run ID and manifest from every reported result. If the snapshot is incomplete, mark the run **unauditable** and do not use it to decide whether the paper was reproduced; either reconstruct the missing evidence reliably or rerun.
 
+### Maintain the experiment ledger
+
+Create `experiment-ledger.md` before the first run and update it immediately after every attempted run, including failed, aborted, and unauditable runs. Keep entries chronological and link each Run ID to its snapshot. Record its baseline, single changed factor, controlled factors, target hypothesis, key result, five-part paper comparison, conclusion, stopping-rule effect, and resulting decision. Do not silently rewrite history; correct an old entry with a dated correction note. The ledger is the experiment narrative, while `reproduction-state.md` is the compact current state.
+
 ## Phase 4: evaluate every run
 
 Tie metrics to the run snapshot and compare like with like: units, aggregation, evaluation mode, checkpoint selection, post-processing, sample count, and variance.
@@ -117,6 +121,18 @@ Define stop criteria before each diagnostic series and enforce them:
 
 Record why a direction was continued, stopped, rejected, or reopened.
 
+## Classify conclusion reproduction status
+
+In the final report, classify every material paper conclusion using evidence from auditable runs:
+
+- **Numerical reproduction:** the target quantitative value is within the predeclared tolerance or comparable multi-seed variation under a sufficiently faithful configuration.
+- **Trend reproduction:** the claimed direction, ranking, scaling behavior, or ablation pattern is reproduced, even if exact values are not. State which conditions establish the trend.
+- **Mechanism reproduction:** a targeted intervention, ablation, trace, or other discriminating test supports the claimed mechanism. Similar output alone is insufficient.
+- **Not reproduced:** sufficiently comparable and powered evidence contradicts the tested numerical, trend, or mechanism claim.
+- **Inconclusive:** evidence is missing, unauditable, underpowered, non-comparable, or unable to discriminate the claim. Do not collapse this into not reproduced.
+
+Numerical, trend, and mechanism reproduction are distinct dimensions, not a guaranteed hierarchy. A conclusion may satisfy more than one. Report status per claim, the Run IDs supporting it, configuration fidelity, contrary evidence, and limitations before giving an overall synthesis.
+
 ## Decision gate after each run
 
 End every substantive response—and always every run report—with a concise checkpoint containing:
@@ -130,8 +146,8 @@ End every substantive response—and always every run report—with a concise ch
 - recommended next single-factor action and alternatives;
 - the explicit decision needed from the user: keep configuration, modify one named factor, authorize a bundled non-attributable change, investigate a discrepancy, stop a direction, or continue.
 
-Update `reproduction-state.md` with the same facts so a later session can resume without chat memory. Do not ask the user to repeat settled facts. If no run occurred, state that the metric gap is not yet measured.
+Update `reproduction-state.md` with current facts and append the run to `experiment-ledger.md` so a later session can reconstruct both state and history without chat memory. Do not ask the user to repeat settled facts. If no run occurred, state that the metric gap is not yet measured.
 
 ## Deliverables
 
-Keep runnable artifacts in the paper workspace, not inside this Skill. Preserve exact commands, run snapshots, machine-readable configurations, logs, checkpoints, metric artifacts, the comparison ledger, and state file. For substantial work, use [references/report-template.md](references/report-template.md) for the final report.
+Keep runnable artifacts in the paper workspace, not inside this Skill. Preserve exact commands, run snapshots, machine-readable configurations, logs, checkpoints, metric artifacts, the paper-to-code comparison ledger, `experiment-ledger.md`, and `reproduction-state.md`. For substantial work, use [references/report-template.md](references/report-template.md) for the final report.

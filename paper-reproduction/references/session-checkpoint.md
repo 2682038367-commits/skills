@@ -2,6 +2,8 @@
 
 Maintain one `reproduction-state.md` in the paper workspace. Keep it concise but sufficient to resume in a new conversation. Update facts in place instead of appending contradictory summaries.
 
+Use `experiment-ledger.md` for chronological run history; keep only the current summary and links here.
+
 ## Evidence labels
 
 Use only these primary labels for material claims:
@@ -25,6 +27,7 @@ Use only these primary labels for material claims:
 - Work completed
 - Next planned checkpoint
 - Pending user decision
+- Latest experiment-ledger entry and Run ID
 
 ## Configuration fidelity
 
@@ -58,5 +61,6 @@ Default: stop after two independent targeted falsifications; a third requires co
 - Run ID and complete snapshot link, or `not run` / `unauditable`
 - Exact matches, deviations, and unknowns
 - Active hypotheses and stopping-rule status
+- Conclusion reproduction status changed by this session, if any
 - Recommended next single-factor action and alternatives
 - Decision requested from the user
