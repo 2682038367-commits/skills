@@ -1,6 +1,13 @@
 # Final reproduction report
 
-Use only relevant sections. Link every observed result to its local log or metric artifact.
+Use only relevant sections. Link every observed result to a complete run snapshot and raw artifact.
+
+## Evidence labels
+
+- **[Paper]:** paper or supplement fact with precise citation.
+- **[Code]:** inspected code/configuration fact with commit and file reference.
+- **[Observed]:** reproduction evidence linked to an artifact or Run ID.
+- **[Hypothesis]:** inference with supporting/conflicting evidence and falsifying check.
 
 ## Scope and selected route
 
@@ -16,50 +23,59 @@ Use only relevant sections. Link every observed result to its local log or metri
 - Data and preprocessing
 - Training and inference
 - Evaluation and target tables/figures
-- Missing or ambiguous details
+- Missing, ambiguous, or conflicting details
 
 ## Artifact manifest
 
-| Artifact | Source or path | Version / commit / checksum | Trust basis and notes |
+| Artifact | Source or path | Version / commit / checksum | Evidence label and notes |
 |---|---|---|---|
-| Paper | | | |
-| Code | | | |
+| Paper | | | [Paper] |
+| Code | | | [Code] |
 | Data | | | |
 | Checkpoint | | | |
 
 ## Paper-to-code configuration ledger
 
-| Item | Paper / supplement | Selected code | Actual run | Difference and impact | Provenance / confidence |
+| Item | [Paper] | [Code] | Actual [Observed] | Difference and impact | Confidence |
 |---|---|---|---|---|---|
 | | | | | | |
 
-## Environment and procedure
+## Run snapshots
 
-- OS, CPU/GPU, accelerator, and memory
-- Runtime, framework, drivers, and key packages
-- Environment or lock-file path
-- Exact commands, configurations, and seeds in execution order
-- Deviations from the selected source
+Every result-bearing run must link a manifest containing repository commit and dirty diff, configuration files and resolved overrides, exact command/arguments, data version and split, all seeds, environment versions, and output artifacts.
+
+| Run ID | Snapshot manifest | Changed factor | Controlled factors | Auditable? |
+|---|---|---|---|---|
+| | | | | |
 
 ## Results
 
-| Claim / metric | Paper | Observed | Absolute gap | Relative gap | Tolerance | Status | Evidence |
-|---|---:|---:|---:|---:|---:|---|---|
-| | | | | | | | |
+| Claim / metric | Current [Observed] | Paper [Paper] | Absolute / relative gap | Beyond multi-seed variation? | Could affect conclusion? | Status | Run ID / evidence |
+|---|---:|---:|---|---|---|---|---|
+| | | | | yes / no / unknown | yes / no / uncertain | | |
 
-For repeated runs, include individual values, aggregation, and variability.
+State how the multi-seed range was obtained. If the paper and local experiments provide no comparable range, mark it unknown.
 
-## Diagnosis
+## Controlled experiment and diagnosis ledger
 
-- Established causes supported by evidence
-- Ranked hypotheses and the evidence for or against each
-- Configuration deviations and expected impact
-- Threats to validity and limits of the reproduction
+| [Hypothesis] | One changed factor | Controlled factors | Evidence and outcomes | Falsifications | Decision / stop reason |
+|---|---|---|---|---:|---|
+| | | | | | |
+
+Separate established [Paper], [Code], and [Observed] facts from [Hypothesis]. Document bundled changes as non-attributable. Record rejected or reopened directions and why.
+
+## Interpretation
+
+- Which claims were reproduced and at what level
+- Configuration deviations and likely impact
+- Whether gaps exceed meaningful random variation
+- Whether any gap could alter the paper's conclusion
+- Threats to validity and limits
 - Whether this is author-code execution or stronger independent replication
 
 ## Decisions and next experiments
 
 - User decisions made during the workflow
-- Failed approaches worth preserving
-- Smallest decisive next experiments
+- Stopped hypotheses and stopping-rule evidence
+- Smallest decisive single-factor experiments
 - Remaining compute, data, or information blockers
