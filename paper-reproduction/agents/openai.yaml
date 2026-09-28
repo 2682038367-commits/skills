@@ -1,0 +1,4 @@
+interface:
+  display_name: "论文复现"
+  short_description: "系统梳理论文与代码差异，逐步复现实验并持续诊断指标偏差原因"
+  default_prompt: "Use $paper-reproduction to analyze this paper, compare available code, recommend a route, and guide me through reproduction step by step."
