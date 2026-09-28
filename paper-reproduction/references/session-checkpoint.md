@@ -21,6 +21,21 @@ Use only these primary labels for material claims:
 - User-selected route and decision rationale
 - Pinned repository commit, data version, and target configuration
 
+## Main/core experiment priority
+
+| Role | Experiment and paper location | Claim tested | Minimum viable version | Inputs / prerequisites | Cost | Status |
+|---|---|---|---|---|---|---|
+| Main | | | | | | planned / running / complete / blocked |
+| Core | | | | | | planned / running / complete / deferred |
+
+- Relationship: same / prerequisite-dependent / validity-dependent / shared-base but outcome-independent / independent-parallel
+- Operational dependency:
+- Interpretive dependency:
+- Does the main result predict the core result? yes / no / partially / unknown, with [Paper], [Code], or [Hypothesis] evidence
+- Time-limited recommendation:
+- Post-main core gate: pending / full core / minimum viable core / repair main first / defer core
+- User decision and rationale:
+
 ## Current stage
 
 - Phase and last completed checkpoint
@@ -28,6 +43,7 @@ Use only these primary labels for material claims:
 - Next planned checkpoint
 - Pending user decision
 - Latest experiment-ledger entry and Run ID
+- Main/core experiment status and next decision gate
 
 ## Configuration fidelity
 

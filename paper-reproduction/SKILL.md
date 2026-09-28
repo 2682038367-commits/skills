@@ -44,6 +44,23 @@ Read the paper and relevant supplement closely enough to produce a reproduction 
 
 Trace every important item to its source using the four evidence labels. Never fill a gap silently.
 
+### Identify the main and core experiments
+
+When the paper contains many experiments, identify these roles immediately after the paper map:
+
+- **Main experiment:** the headline or standard benchmark experiment used to establish the overall result against the principal baselines.
+- **Core experiment:** the single most discriminating experiment that directly demonstrates the largest claimed advantage of the paper innovation. Prefer an experiment whose result would be difficult to explain without the proposed innovation, such as a decisive ablation, controlled comparison, stress test, mechanism intervention, or advantage under the target condition. Do not select it merely because it has the largest table or best absolute metric.
+
+The main and core experiment may be the same; state that explicitly. Otherwise report for each: claim tested, paper location, target metric or pattern, baseline/control, minimum viable version, required artifacts, expected compute, and why it is assigned that role.
+
+Classify their relationship as one of: **same experiment**, **prerequisite-dependent**, **validity-dependent**, **shared-base but outcome-independent**, or **independent/parallel**. Separately answer:
+
+1. Does the core experiment require the main experiment checkpoint, outputs, or validated pipeline to run?
+2. Does the main result determine how the core result should be interpreted?
+3. Does a strong or weak main result logically predict the core result, or is that relationship only a hypothesis?
+
+Do not confuse operational dependence with evidential dependence. A core experiment may require a checkpoint produced by the main run while still testing an advantage not determined by the main score. In a time-limited plan, recommend completing both the main and core experiments whenever feasible. If the full core experiment is too expensive, propose a minimum viable core experiment and state what evidence it can and cannot provide.
+
 ## Phase 2: find and audit open-source code
 
 Search for the official author or lab repository first, following links from the paper or project page. Then search credible third-party implementations only when they help fill a gap or provide an independent comparison. Record repository URL, ownership, license, branch or commit, release/tag, activity, framework, supported data, checkpoints, and evidence that it implements this paper. Do not call a repository official without primary-source evidence.
@@ -63,13 +80,16 @@ Before implementation or a meaningful experiment, present:
 2. candidate repositories and evidence-based trust assessment;
 3. material paper-versus-code differences;
 4. feasible routes, expected fidelity, compute cost, risks, and what each can prove;
-5. a recommendation tied to the user's goal.
+5. a recommendation tied to the user goal;
+6. the selected main experiment, core experiment, dependency class, and time-limited priority plan.
 
 For matching published numbers, usually recommend official code at a pinned version as the first baseline, followed by a paper-faithful variant for material discrepancies. For independent reimplementation, use the paper and supplement as the specification and code as clarification evidence. If sources conflict materially, recommend a choice but let the user select the route before proceeding.
 
 ## Phase 3: plan controlled experiments
 
 After route selection, provide an ordered plan with checkpoints. For each step state the exact action, source being followed, expected artifact, validation and stop condition, and material compute cost.
+
+The ordered plan must mark every experiment as **main**, **core**, or **supporting** and show prerequisites. Unless evidence indicates another order, establish the main baseline first and reserve time for the core experiment.
 
 Create an isolated environment when practical. Validate data provenance, licensing, shapes, mappings, splits, and preprocessing. Treat downloaded code and scripts as untrusted until inspected. Start with the cheapest end-to-end diagnostic, then a small controlled run, then the full target.
 
@@ -109,6 +129,18 @@ Also report absolute and relative gaps when meaningful. For the variation judgme
 
 Report exact configuration fidelity, known deviations, and their likely impact. Rank possible causes using the four labels and propose the smallest single-factor experiment that distinguishes the leading hypotheses. Use **reproduced**, **approximately reproduced**, **not reproduced**, **inconclusive**, or **unauditable**. Never present a planned, estimated, cached, or partial result as executed evidence. Do not weaken evaluation, tune on the test set, or alter metric code merely to match the paper.
 
+## Core-experiment decision gate after the main run
+
+After the main experiment finishes, do not automatically start or discard the core experiment. Present the user with a recommendation based on:
+
+- whether the main run is auditable and faithful enough for the core result to be interpretable;
+- the main metric gap, multi-seed context, conclusion impact, and unresolved setup failures;
+- the declared dependency class and whether required checkpoints or artifacts are valid;
+- whether the core experiment can diagnose the main gap or test the innovation despite a weak main score;
+- remaining time/compute and the information gain of the full or minimum viable core experiment.
+
+Recommend exactly one next state: **run the full core experiment**, **run the minimum viable core experiment**, **repair/rerun the main experiment first**, or **defer/skip the core experiment**. Explain what evidence would be gained or lost. A poor main score is not by itself sufficient reason to skip an outcome-independent or diagnostically useful core experiment; an invalid prerequisite is a reason to repair the main path first. Let the user decide before incurring meaningful core-experiment cost, and record the decision in both state and ledger.
+
 ## Experiment stopping rules
 
 Define stop criteria before each diagnostic series and enforce them:
@@ -143,6 +175,7 @@ End every substantive response—and always every run report—with a concise ch
 - configuration fidelity and the linked Run ID/configuration snapshot;
 - problems and ranked hypotheses;
 - stopping-rule status for each active hypothesis;
+- main/core experiment status, dependency, and whether the core-experiment gate is pending or resolved;
 - recommended next single-factor action and alternatives;
 - the explicit decision needed from the user: keep configuration, modify one named factor, authorize a bundled non-attributable change, investigate a discrepancy, stop a direction, or continue.
 

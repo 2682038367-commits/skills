@@ -25,6 +25,21 @@ Use only relevant sections. Link every observed result to a complete run snapsho
 - Evaluation and target tables/figures
 - Missing, ambiguous, or conflicting details
 
+## Main and core experiment priority
+
+| Role | Experiment / paper location | Innovation claim tested | Target metric or pattern | Minimum viable version | Required artifacts | Cost | Final status |
+|---|---|---|---|---|---|---|---|
+| Main | | | | | | | |
+| Core | | | | | | | |
+
+- Relationship: same / prerequisite-dependent / validity-dependent / shared-base but outcome-independent / independent-parallel
+- Operational dependency and prerequisites:
+- Interpretive dependency:
+- Whether the main result predicts the core result, with evidence:
+- Initial time-limited recommendation:
+- Post-main recommendation: full core / minimum viable core / repair main first / deferred
+- User decision and resulting evidence gained or lost:
+
 ## Artifact manifest
 
 | Artifact | Source or path | Version / commit / checksum | Evidence label and notes |
@@ -92,6 +107,7 @@ Separate established [Paper], [Code], and [Observed] facts from [Hypothesis]. Do
 ## Decisions and next experiments
 
 - User decisions made during the workflow
+- Main/core experiment selection, dependency assessment, and post-main core-gate decision
 - Stopped hypotheses and stopping-rule evidence
 - Smallest decisive single-factor experiments
 - Remaining compute, data, or information blockers

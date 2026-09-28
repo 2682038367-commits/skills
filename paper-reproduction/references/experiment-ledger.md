@@ -13,15 +13,17 @@ Create `experiment-ledger.md` in the paper workspace before the first run. It is
 
 ## Chronological index
 
-| Time | Run ID | Baseline | Changed factor | Target hypothesis | Key result | Five-part comparison | Conclusion / decision | Snapshot |
-|---|---|---|---|---|---|---|---|---|
-| | | | | | | Current → Paper → Gap → Beyond seed range? → Conclusion impact? | | |
+| Time | Run ID | Role | Baseline | Changed factor | Target hypothesis | Key result | Five-part comparison | Conclusion / decision | Snapshot |
+|---|---|---|---|---|---|---|---|---|---|
+| | | main / core / supporting | | | | | Current → Paper → Gap → Beyond seed range? → Conclusion impact? | | |
 
 ## Run entry
 
 ### `<run-id>` — `<ISO 8601 time>`
 
 - Status: completed / failed / aborted / unauditable
+- Experiment role: main / core / supporting
+- Main/core dependency and prerequisite status:
 - Baseline Run ID:
 - Single changed factor:
 - Controlled factors:
@@ -33,4 +35,5 @@ Create `experiment-ledger.md` in the paper workspace before the first run. It is
 - Hypothesis outcome: supported / weakened / falsified / inconclusive
 - Stopping-rule effect:
 - Decision and next experiment:
+- Post-main core-gate recommendation and user decision, when applicable:
 - Correction history, if any:
